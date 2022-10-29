@@ -42,7 +42,7 @@ function shortenIT(form) {
   const endpoint = "v1/shorten_url"
   const complete_URL = domainName + endpoint + "?long_URL=" + params
   console.log("POST: ", complete_URL )
-  axios.post(complete_URL,{ withCredentials: true, headers})
+  axios.post(complete_URL,{ withCredentials: true}, {headers})
         .then(response => {
               response_login = response['data']['shorten_url'];
               console.log("OUTPUT HASH:", response_login)
