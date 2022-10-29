@@ -202,7 +202,7 @@ function changeForm() {
 
 
 function getAnalytics() {
-  if (window.location.pathname=='/analytics') {
+  if (window.location.pathname=='/project4-shorten_url_FE/analytics') {
 
     const endpoint = "v1/analytics"
     const complete_URL = domainName + endpoint 
@@ -263,6 +263,6 @@ if(window.location.hash != '#r') {
     window.location.hash = 'r';
     window.location.reload(1);
 }
-}, 500);  // After 5 secs
+}, 1000);  // After 5 secs
 
 user()
