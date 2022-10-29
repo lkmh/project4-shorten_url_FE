@@ -96,7 +96,7 @@ function login() {
                 }
               })
   location.reload();
-  window.location.href = "/analytics";
+  window.location.href = "/project4-shorten_url_FE/analytics";
   return false
   };
 
@@ -253,7 +253,7 @@ function logout() {
                   console.log(error.response.data);
                 }
               })
-  window.location.href = "/";
+  window.location.href = "/project4-shorten_url_FE/";
   return false
   };
 
@@ -263,6 +263,6 @@ if(window.location.hash != '#r') {
     window.location.hash = 'r';
     window.location.reload(1);
 }
-}, 1000);  // After 5 secs
+}, 500);  // After 5 secs
 
 user()
