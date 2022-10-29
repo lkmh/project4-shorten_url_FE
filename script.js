@@ -1,11 +1,41 @@
-
+const domainName = "https://project4-short-url.herokuapp.com/";
 const headers = {
   "Access-Control-Allow-Origin": location.origin
 }
 
+// setTimeout(function () {
+//   if(window.location.hash != '#r') {
+//       window.location.hash = 'r';
+//       window.location.reload(1);
+//   }
+// }, 1000);  // After 5 secs
+
+const user = async () => {
+  const endpoint = "v1/user"
+  const complete_URL = domainName + endpoint 
+  await axios.get(complete_URL,{ withCredentials: true, headers})
+  .then(response => {
+    if (response.status == 200) {
+      console.log("True")
+      const NAVanalytics = document.getElementById('nav-bar-analytics')
+      NAVanalytics.removeAttribute("hidden")
+      const NAVLogout = document.getElementById('nav-bar-logout')
+      NAVLogout.removeAttribute("hidden")
+      const NAVChangePassword = document.getElementById('nav-bar-changePassword')
+      NAVChangePassword.removeAttribute("hidden")
+      const NAVSignup = document.getElementById('nav-bar-signup')
+      NAVSignup.setAttribute("hidden", true);
+      const NAVLogin = document.getElementById('nav-bar-login')
+      NAVLogin.setAttribute("hidden", true);
+    }
+   response_login = response; 
+   console.log(`user;`, response_login);
+ })
+  .catch(error => console.error(error));
+ };
+
+
 function shortenIT(form) {
-  const domainName = "https://project4-short-url.herokuapp.com/";
-  
   console.log('Domain',domainName)
   const params = form.longURL.value
   console.log('Params',params)
@@ -50,7 +80,7 @@ function login() {
                   "password": password
                 }
   console.log("params: ", params)
-  const domainName = "https://project4-short-url.herokuapp.com/";
+ 
   const endpoint = "v1/login"
   const complete_URL = domainName + endpoint 
   axios.post(complete_URL, params, { withCredentials: true, headers})
@@ -65,6 +95,8 @@ function login() {
                   console.log(error.response.data);
                 }
               })
+  location.reload();
+  window.location.href = "/analytics";
   return false
   };
 
@@ -77,7 +109,7 @@ function signup() {
                   "password": password
                 }
   console.log("params: ", params)
-  const domainName = "https://project4-short-url.herokuapp.com/";
+  
   const endpoint = "v1/signup"
   const complete_URL = domainName + endpoint 
   axios.post(complete_URL, params, { withCredentials: true, headers})
@@ -97,16 +129,20 @@ function signup() {
 
 function reset1Form() {
     const email = document.getElementById('reset1Form').elements['email1'].value;
-    const domainName = "https://project4-short-url.herokuapp.com/";
+    
     const endpoint = "v1/forget_password_step1"
 
     const complete_URL = domainName + endpoint + "?email=" + email
     console.log("Complete URL- forget1", complete_URL)
     axios.post(complete_URL, { withCredentials: true, headers})
           .then(response => {
-                response_login = response;
-                console.log("OUTPUT :", response_login)
-                })
+            if (response.status == 200) {
+                console.log("True")
+                const reset1 = document.getElementById('reset1Form')
+                reset1.setAttribute("hidden", true);
+                const reset2 = document.getElementById('reset2Form')
+                reset2.removeAttribute("hidden")
+                }})
           .catch(function (error) {
                   if (error.response) {
                     // The request was made and the server responded with a status code
@@ -121,7 +157,7 @@ function reset2Form() {
       const code = document.getElementById('reset2Form').elements['temp_hash'].value;
       const email = document.getElementById('reset2Form').elements['email2'].value;
       const password = document.getElementById('reset2Form').elements['password'].value;
-      const domainName = "https://project4-short-url.herokuapp.com/";
+
       const endpoint = "v1/forget_password_step2"
       const complete_URL = domainName + endpoint + "?temp_hash=" + code + "&email=" + email + "&new_password=" + password
       console.log("Complete URL- forget2", complete_URL)
@@ -139,3 +175,94 @@ function reset2Form() {
                   })
       return false
       };
+
+
+
+function changeForm() {
+  const oldPassword = document.getElementById('changeForm').elements['oldPassword'].value;
+  const newPassword = document.getElementById('changeForm').elements['newPassword'].value;
+
+  const endpoint = "v1/change_password"
+  const complete_URL = domainName + endpoint + "?old_password=" + oldPassword + "&new_password=" + newPassword
+  console.log("Complete URL- change", complete_URL)
+  axios.get(complete_URL, { withCredentials: true, headers})
+        .then(response => {
+              response_login = response;
+              console.log("OUTPUT :", response_login)
+              })
+        .catch(function (error) {
+                if (error.response) {
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                  console.log(error.response.data);
+                }
+              })
+  return false
+  };
+
+
+function getAnalytics() {
+  if (window.location.pathname=='/analytics') {
+
+    const endpoint = "v1/analytics"
+    const complete_URL = domainName + endpoint 
+    console.log("Complete URL- analytiics", complete_URL)
+    axios.get(complete_URL, { withCredentials: true, headers})
+          .then(response => {
+                console.log(response)
+                response_login = response['data']['data'];
+                console.log("OUTPUT :", response_login) 
+                console.log(response_login.length)
+                if (response_login.length > 0) {
+                  console.log("into if")
+                  var temp = "";
+                  response_login.forEach((itemData) => {
+                    console.log(itemData)
+                    temp += "<tr>";
+                    temp += "<td>" + itemData.hash_url + "</td>";
+                    temp += "<td>" + itemData.total_view_count + "</td>";
+                    temp += "<td>" + itemData.original_url + "</td></tr>";
+                  });
+                console.log(temp)
+                  document.getElementById('analyticsTable').innerHTML = temp;
+                }})
+          .catch(function (error) {
+                  if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                  }
+                })
+    return false
+    }};
+getAnalytics()
+
+function logout() {
+  const endpoint = "v1/logout"
+  const complete_URL = domainName + endpoint 
+  axios.delete(complete_URL,  { withCredentials: true, headers})
+        .then(response => {
+              response_login = response;
+              console.log("Logout:", response_login)
+       
+              })
+        .catch(function (error) {
+                if (error.response) {
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                  console.log(error.response.data);
+                }
+              })
+  window.location.href = "/";
+  return false
+  };
+
+
+setTimeout(function () {
+if(window.location.hash != '#r') {
+    window.location.hash = 'r';
+    window.location.reload(1);
+}
+}, 1000);  // After 5 secs
+
+user()
