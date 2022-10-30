@@ -2,7 +2,6 @@ body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
-	/* height: 100vh; */
   height: 100%;
 }
 
@@ -25,18 +24,15 @@ body {
   text-align: center;
   color: white;
   font-size:50px
-
 }
 
 .short-it-form {
   margin: 20px auto 20px auto;
   width: 90%;
-  /* border: 5px solid #FFFF00; */
   padding: 10px 30px 10px;
   text-align: center;
   box-shadow: 0 1px 4px #ccc;
   background: white;
-
 }
 
 input {
