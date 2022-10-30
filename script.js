@@ -289,6 +289,6 @@ if(window.location.hash != '#r') {
     window.location.hash = 'r';
     window.location.reload(1);
 }
-}, 1500);  // After 5 secs
+}, 2000);  // After 5 secs
 
 user()
