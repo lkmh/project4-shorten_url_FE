@@ -57,8 +57,8 @@
         </div>
         <div class="mb-3">
           <label for="passwordd" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password">
-          <div id="passwordHelp" class="form-text">6-9 Characters </div>
+          <input type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,10}$" id="password">
+          <div id="passwordHelp" class="form-text">Must contain at least one number and one special character and one uppercase and lowercase letter, and 6-10 characters</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
