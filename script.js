@@ -123,7 +123,7 @@ function login() {
                 }
               })
   location.reload();
-  window.location.href = "/project4-shorten_url_FE/analytics";
+  window.location.href = "/analytics";
   return false
   };
 
@@ -229,7 +229,7 @@ function changeForm() {
 
 
 function getAnalytics() {
-  if (window.location.pathname=='/project4-shorten_url_FE/analytics') {
+  if (window.location.pathname=='/analytics') {
     const endpoint = "v1/analytics"
     const complete_URL = domainName + endpoint 
     console.log("Complete URL- analytiics", complete_URL)
@@ -279,7 +279,7 @@ function logout() {
                   console.log(error.response.data);
                 }
               })
-  window.location.href = "/project4-shorten_url_FE/";
+  window.location.href = "/";
   return false
   };
 
