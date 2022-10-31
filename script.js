@@ -30,6 +30,8 @@ const user = async () => {
 };
 
 function shortenIT(form) {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
   console.log('Domain',domainName)
   const params = form.longURL.value
   console.log('Params',params)
@@ -41,6 +43,7 @@ function shortenIT(form) {
   .then(response => {
     response_login = response['data']['shorten_url'];
     console.log("OUTPUT HASH:", response_login)
+    loader.setAttribute("hidden", true)
     shortItURL = domainName + response_login
     form.longURL.value = shortItURL
     navigator.clipboard.writeText(form.longURL.value);
@@ -59,6 +62,8 @@ function shortenIT(form) {
 };
 
 function shortenITv2(form) {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
   console.log('Domain',domainName)
   const params = form.longURL.value
   console.log('Params',params)
@@ -69,6 +74,7 @@ function shortenITv2(form) {
   .then(response => {
     response_login = response['data']['shorten_url'];
     console.log("OUTPUT HASH:", response_login)
+    loader.setAttribute("hidden", true)
     shortItURL = domainName + response_login
     form.longURL.value = shortItURL
     navigator.clipboard.writeText(form.longURL.value);
@@ -87,6 +93,8 @@ function shortenITv2(form) {
 };
 
 function login() {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
   const email = document.getElementById('loginForm').elements['email'].value;
   const password = document.getElementById('loginForm').elements['password'].value;
   const params = {
@@ -102,6 +110,7 @@ function login() {
     console.log("OUTPUT :", response_login)
     if (response_login.status == 200) {
       console.log("True")
+      loader.setAttribute("hidden", true)
       location.reload();
       window.location.href = "/analytics";
     }
@@ -117,6 +126,8 @@ function login() {
 };
 
 function signup() {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
   const email = document.getElementById('loginForm').elements['email'].value;
   const password = document.getElementById('loginForm').elements['password'].value;
   const params = {
@@ -130,6 +141,8 @@ function signup() {
   .then(response => {
         response_login = response;
         console.log("OUTPUT :", response_login)
+        loader.setAttribute("hidden", true)
+        window.location.href = "/login";
   })
   .catch(function (error) {
   if (error.response) {
@@ -142,6 +155,8 @@ function signup() {
 }
 
 function reset1Form() {
+  const loader = document.getElementById('loader1')
+  loader.removeAttribute("hidden")
   const email = document.getElementById('reset1Form').elements['email1'].value;
   const endpoint = "v1/forget_password_step1"
   const complete_URL = domainName + endpoint + "?email=" + email
@@ -154,6 +169,7 @@ function reset1Form() {
         reset1.setAttribute("hidden", true);
         const reset2 = document.getElementById('reset2Form')
         reset2.removeAttribute("hidden")
+        loader.setAttribute("hidden", true)
     }
   })
   .catch(function (error) {
@@ -167,6 +183,8 @@ function reset1Form() {
 }
 
 function reset2Form() {
+  const loader = document.getElementById('loader2')
+  loader.removeAttribute("hidden")
   const code = document.getElementById('reset2Form').elements['temp_hash'].value;
   const email = document.getElementById('reset2Form').elements['email2'].value;
   const password = document.getElementById('reset2Form').elements['password'].value;
@@ -177,6 +195,7 @@ function reset2Form() {
   .then(response => {
         response_login = response;
         console.log("OUTPUT :", response_login)
+        loader.setAttribute("hidden", true)
   })
   .catch(function (error) {
     if (error.response) {
@@ -189,8 +208,11 @@ function reset2Form() {
 }
 
 function changeForm() {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
   const oldPassword = document.getElementById('changeForm').elements['oldPassword'].value;
   const newPassword = document.getElementById('changeForm').elements['newPassword'].value;
+  
   const endpoint = "v1/change_password"
   const complete_URL = domainName + endpoint + "?old_password=" + oldPassword + "&new_password=" + newPassword
   console.log("Complete URL- change", complete_URL)
@@ -198,6 +220,7 @@ function changeForm() {
   .then(response => {
     response_login = response;
     console.log("OUTPUT :", response_login)
+    loader.setAttribute("hidden", true)
   })
   .catch(function (error) {
     if (error.response) {
