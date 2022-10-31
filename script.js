@@ -3,6 +3,8 @@ const headers = {
                 "Access-Control-Allow-Origin": location.origin
 }
 
+document.getElementById("hideAll").style.display = "block";
+
 const user = async () => {
   const endpoint = "v1/user"
   const complete_URL = domainName + endpoint 
@@ -62,6 +64,45 @@ function shortenIT(form) {
   return false
 };
 
+function shortenITQR(form) {
+  const loader = document.getElementById('loader')
+  loader.removeAttribute("hidden")
+  console.log(loader)
+  console.log('Domain',domainName)
+  const params = form.longURL.value
+  console.log('Params',params)
+  const endpoint = "v1/shorten_url"
+  const complete_URL = domainName + endpoint + "?long_URL=" + params
+  console.log("POST: ", complete_URL )
+  axios.defaults.withCredentials = true
+  axios.post(complete_URL,{ withCredentials: true}, {headers})
+  .then(response => {
+    response_login = response['data']['shorten_url'];
+    console.log("OUTPUT HASH:", response_login)
+    loader.setAttribute("hidden", true)
+    shortItURL = domainName + response_login
+    form.longURL.value = shortItURL
+    navigator.clipboard.writeText(form.longURL.value);
+    const postP = document.getElementById("postShorten")
+    postP.value = shortItURL
+    const preP = document.getElementById("preShorten")
+    preP.value = params
+    postP.style.backgroundColor = "#EBF5FB"
+    const postP_button = document.getElementById("postShortenButton")
+    postP_button.disabled = true
+    const qr_api = "http://api.qrserver.com/v1/create-qr-code/?data="
+    qr_string = qr_api + shortItURL + "&size=100x100"
+    document.getElementById("QR-code-text").removeAttribute("hidden")
+    document.getElementById("QR-code").removeAttribute("hidden")
+    document.getElementById("QR-code").src= qr_string
+    console.log(document.getElementById("QR-code"))
+  })
+  .catch(error => 
+    console.error(error)
+  );
+  return false
+};
+
 function shortenITv2(form) {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
@@ -87,6 +128,12 @@ function shortenITv2(form) {
     postP.style.backgroundColor = "#EBF5FB"
     const postP_button = document.getElementById("postShortenButton")
     postP_button.disabled = true
+    // const qr_api = "http://api.qrserver.com/v1/create-qr-code/?data="
+    // qr_string = qr_api + shortItURL + "&size=100x100"
+    // document.getElementById("QR-code-text").removeAttribute("hidden")
+    // document.getElementById("QR-code").removeAttribute("hidden")
+    // document.getElementById("QR-code").src= qr_string
+    // console.log(document.getElementById("QR-code"))
     })
   .catch(error => 
     console.error(error)
@@ -122,7 +169,10 @@ function login() {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log(error.response.data);
+      console.log(error.response.data['detail']);
+      document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+      loader.setAttribute("hidden", true)
+      console.log(loader)
     }
   })
   return false
@@ -152,7 +202,10 @@ function signup() {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
-    console.log(error.response.data);
+    console.log(error.response.data['detail']);
+    document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+    loader.setAttribute("hidden", true)
+    console.log(loader)
     }
   })
   return false
@@ -181,7 +234,10 @@ function reset1Form() {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log(error.response.data);
+      console.log(error.response.data['detail']);
+      document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+      loader.setAttribute("hidden", true)
+      console.log(loader)
     }
   })
   return false
@@ -207,7 +263,11 @@ function reset2Form() {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log(error.response.data);
+      
+      console.log(error.response.data['detail']);
+      document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+      loader.setAttribute("hidden", true)
+      console.log(loader)
     }
   })
   return false
@@ -232,7 +292,10 @@ function changeForm() {
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log(error.response.data);
+      console.log(error.response.data['detail']);
+      document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+      loader.setAttribute("hidden", true)
+      console.log(loader)
     }
   })
   return false
@@ -261,6 +324,8 @@ function getAnalytics() {
         })
         console.log(temp)
         document.getElementById('analyticsTable').innerHTML = temp;
+        document.getElementById("hideAll").style.display = "none"
+        console.log(document.getElementById("hideAll").style.display)
         }
     })
     .catch(function (error) {
@@ -295,11 +360,12 @@ function logout() {
   return false
 }
 
-setTimeout(function () {
-  if(window.location.hash != '#r') {
-    window.location.hash = 'r';
-    window.location.reload(1);
-  }
-  }, 2000);  // After 5 secs
+// setTimeout(function () {
+//   if(window.location.hash != '#r') {
+//     window.location.hash = 'r';
+//     window.location.reload(1);
+//   }
+//   }, 2000);  // After 5 secs
+
 
 user()

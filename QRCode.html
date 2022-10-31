@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <title>Short IT - Change Password</title>
+    <title>Short IT - QR Code</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Shorten URL</a>
@@ -59,29 +59,34 @@
     </nav>
   </head>
   <body>
-    <h1 class="title">Change Password</h1>
+    <h1 class="title">Short IT - QR Code Generator</h1>
     <body>
       <div class="short-it-form">
-        <h2></h2>
-        <p id="msgAPI" style="color:red;">-</p>
-        <div class="d-flex justify-content-center">
-          <form id="changeForm" onsubmit="return changeForm()">
-            <div class="mb-3">
-              <label for="password" class="form-label">Old Password</label>
-              <input type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,10}$" id="oldPassword" />
-            </div>
-
-            <div class="mb-3">
-              <label for="password" class="form-label">New Password</label>
-              <input type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,10}$" id="newPassword" />
-              <div id="passwordHelp" class="form-text">Must contain at least one number and one special character and one uppercase and lowercase letter, and 6-10 characters</div>
-            </div>
-            <button type="submit" class="btn btn-primary">Change Password</button>
-            <div>
-              <div id="loader" hidden></div>
-            </div>
-          </form>
-        </div>
+        <h2>Paste URL to Short IT to Generate a QR Code</h2>
+        <form id="form" onsubmit="return  shortenITQR(this)">
+          <input class="inputForm" id="preShorten" name="longURL" type="url" placeholder="  Input Long URL: https://google.com" required />
+          <button type="submit">Short IT</button>
+        </form>
+        <form id="form">
+          <input class="inputForm" id="postShorten" type="text" placeholder="   Return sharable link" readonly />
+          <button id="postShortenButton">Copied .</button>
+          <br>
+          <h5 id="QR-code-text" hidden >QR Code Generated </h5>
+          <img id="QR-code" hidden src="" alt="QR Code">
+          <div>
+            <div id="loader" hidden></div>
+          </div>
+        </form>
+        <br />
+        <p>
+          Looking to shorten those long, pesky URLs? Look no further than Short it! x<br />
+          Just paste the long URL into the Shorten URL button and copy the shortened URL to share.
+        </p>
+      </div>
+      <div class="short-it-form">
+        <h2>Track Link Analytics with FREE Signup</h2>
+        <p>You can even track how many clicks your Short IT URL receives</p>
+        <a class="btn btn-outline-success" href="/signup" role="button">Sign Up</a>
       </div>
       <footer class="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
         <div class="container text-center">
