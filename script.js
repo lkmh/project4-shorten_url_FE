@@ -32,6 +32,7 @@ const user = async () => {
 function shortenIT(form) {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
+  console.log(loader)
   console.log('Domain',domainName)
   const params = form.longURL.value
   console.log('Params',params)
@@ -64,6 +65,7 @@ function shortenIT(form) {
 function shortenITv2(form) {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
+  console.log(loader)
   console.log('Domain',domainName)
   const params = form.longURL.value
   console.log('Params',params)
@@ -95,6 +97,7 @@ function shortenITv2(form) {
 function login() {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
+  console.log(loader)
   const email = document.getElementById('loginForm').elements['email'].value;
   const password = document.getElementById('loginForm').elements['password'].value;
   const params = {
@@ -128,6 +131,7 @@ function login() {
 function signup() {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
+  console.log(loader)
   const email = document.getElementById('loginForm').elements['email'].value;
   const password = document.getElementById('loginForm').elements['password'].value;
   const params = {
@@ -157,6 +161,7 @@ function signup() {
 function reset1Form() {
   const loader = document.getElementById('loader1')
   loader.removeAttribute("hidden")
+  console.log(loader)
   const email = document.getElementById('reset1Form').elements['email1'].value;
   const endpoint = "v1/forget_password_step1"
   const complete_URL = domainName + endpoint + "?email=" + email
@@ -185,6 +190,7 @@ function reset1Form() {
 function reset2Form() {
   const loader = document.getElementById('loader2')
   loader.removeAttribute("hidden")
+  console.log(loader)
   const code = document.getElementById('reset2Form').elements['temp_hash'].value;
   const email = document.getElementById('reset2Form').elements['email2'].value;
   const password = document.getElementById('reset2Form').elements['password'].value;
@@ -210,9 +216,9 @@ function reset2Form() {
 function changeForm() {
   const loader = document.getElementById('loader')
   loader.removeAttribute("hidden")
+  console.log(loader)
   const oldPassword = document.getElementById('changeForm').elements['oldPassword'].value;
   const newPassword = document.getElementById('changeForm').elements['newPassword'].value;
-  
   const endpoint = "v1/change_password"
   const complete_URL = domainName + endpoint + "?old_password=" + oldPassword + "&new_password=" + newPassword
   console.log("Complete URL- change", complete_URL)
