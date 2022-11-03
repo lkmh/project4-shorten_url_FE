@@ -298,6 +298,7 @@ function changeForm() {
       console.log(loader)
     }
   })
+  window.location.href = "/analytics";
   return false
 }
 
