@@ -311,7 +311,6 @@ function getAnalytics() {
       console.log(response)
       response_login = response['data']['data'];
       console.log("OUTPUT :", response_login) 
-      console.log(response_login.length)
       if (response_login.length >= 0) {
         console.log("into if")
         var temp = "";
@@ -326,6 +325,8 @@ function getAnalytics() {
         document.getElementById('analyticsTable').innerHTML = temp;
         document.getElementById("hideAll").style.display = "none"
         console.log(document.getElementById("hideAll").style.display)
+        } else {
+          document.getElementById("hideAll").style.display = "none"
         }
     })
     .catch(function (error) {
