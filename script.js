@@ -287,6 +287,7 @@ function changeForm() {
     response_login = response;
     console.log("OUTPUT :", response_login)
     loader.setAttribute("hidden", true)
+    window.location.href = "/analytics";
   })
   .catch(function (error) {
     if (error.response) {
@@ -298,7 +299,7 @@ function changeForm() {
       console.log(loader)
     }
   })
-  window.location.href = "/analytics";
+  
   return false
 }
 
