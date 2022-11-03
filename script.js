@@ -325,7 +325,7 @@ function getAnalytics() {
         document.getElementById('analyticsTable').innerHTML = temp;
         document.getElementById("hideAll").style.display = "none"
         console.log(document.getElementById("hideAll").style.display)
-        } else {
+      } else {
           document.getElementById("hideAll").style.display = "none"
         }
     })
