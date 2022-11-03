@@ -312,7 +312,7 @@ function getAnalytics() {
       response_login = response['data']['data'];
       console.log("OUTPUT :", response_login) 
       console.log(response_login.length)
-      if (response_login.length > 0) {
+      if (response_login.length >= 0) {
         console.log("into if")
         var temp = "";
         response_login.forEach((itemData) => {
