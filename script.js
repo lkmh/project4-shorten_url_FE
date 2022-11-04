@@ -266,10 +266,12 @@ function reset2Form() {
       
       console.log(error.response.data['detail']);
       document.getElementById('msgAPI').innerHTML = error.response.data['detail']
+      console.log(document.getElementById('msgAPI').innerHTML)
       loader.setAttribute("hidden", true)
       console.log(loader)
     }
   })
+  window.location.href = "/login";
   return false
 }
 
