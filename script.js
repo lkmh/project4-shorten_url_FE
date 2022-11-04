@@ -304,9 +304,11 @@ function changeForm() {
 }
 
 function getAnalytics() {
-  const loader = document.getElementById('loader')
-  loader.removeAttribute("hidden")
+
   if (window.location.pathname=='/analytics') {
+    const loader = document.getElementById('loader')
+    loader.removeAttribute("hidden")
+    console.log(loader)
     const endpoint = "v1/analytics"
     const complete_URL = domainName + endpoint 
     console.log("Complete URL- analytiics", complete_URL)
@@ -329,6 +331,7 @@ function getAnalytics() {
         document.getElementById('analyticsTable').innerHTML = temp;
         document.getElementById("hideAll").style.display = "none"
         loader.setAttribute("hidden", true)
+        console.log(loader)
         console.log(document.getElementById("hideAll").style.display)
       } else {
           document.getElementById("hideAll").style.display = "none"
