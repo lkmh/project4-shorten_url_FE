@@ -335,6 +335,7 @@ function getAnalytics() {
         console.log(loader)
         console.log(document.getElementById("hideAll").style.display)
       } else {
+          loader.setAttribute("hidden", true)
           document.getElementById("hideAll").style.display = "none"
         }
     })
