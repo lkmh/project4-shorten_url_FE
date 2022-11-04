@@ -328,9 +328,10 @@ function getAnalytics() {
           temp += "<td>" + itemData.original_url + "</td></tr>";
         })
         console.log(temp)
+        loader.setAttribute("hidden", true)
         document.getElementById('analyticsTable').innerHTML = temp;
         document.getElementById("hideAll").style.display = "none"
-        loader.setAttribute("hidden", true)
+        
         console.log(loader)
         console.log(document.getElementById("hideAll").style.display)
       } else {
